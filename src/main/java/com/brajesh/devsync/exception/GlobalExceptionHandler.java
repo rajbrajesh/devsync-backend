@@ -1,25 +1,34 @@
 package com.brajesh.devsync.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleValidationException(MethodArgumentNotValidException ex) {
-
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
 
-        ex.getFieldErrors().forEach(error ->
-                errors.put(error.getField(), error.getDefaultMessage())
+        ex.getBindingResult().getFieldErrors()
+                .forEach(error ->
+                        errors.put(error.getField(), error.getDefaultMessage())
+                );
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Validation Failed",
+                errors
         );
 
-        return errors;
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+
 }
