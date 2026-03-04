@@ -1,0 +1,50 @@
+package com.brajesh.devsync.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+public class Task {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NotBlank(message = "Title cannot be empty")
+    private String title;
+
+    @NotBlank(message = "Platform cannot be empty")
+    private String platform;
+
+    public Task(){
+        // Needed for JSON deserialization
+    }
+    public Task(Integer id,String title,String platform){
+        this.id = id;
+        this.title = title;
+        this.platform = platform;
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+
+    public String getTitle(){
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+    public String getPlatform(){
+        return platform;
+    }
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+}
