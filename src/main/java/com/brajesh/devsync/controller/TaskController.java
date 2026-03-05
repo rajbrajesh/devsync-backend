@@ -55,4 +55,13 @@ public class TaskController {
     ) {
         return taskService.updateTask(id, dto);
     }
+
+    // Delete task by ID
+    @DeleteMapping("/api/tasks/{id}")
+    public String deleteTask(@PathVariable Integer id){
+
+        taskService.deleteTask(id);
+
+        return "Task deleted successfully";
+    }
 }

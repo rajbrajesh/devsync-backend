@@ -60,4 +60,15 @@ public class TaskService {
         // Step 3: Save updated task
         return taskRepository.save(task);
     }
+
+    // Delete task by ID
+    public void deleteTask(Integer id) {
+
+        // Check if task exists
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        // Delete task
+        taskRepository.delete(task);
+    }
 }
