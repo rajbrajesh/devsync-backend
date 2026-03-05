@@ -27,4 +27,21 @@ public class TaskService {
         // Save task into database
         return taskRepository.save(task);
     }
+
+    // Get single task using ID
+    public Task getTaskById(Integer id){
+
+        // findById returns Optional
+        // Optional is used because record may or may not exist
+
+        Optional<Task> task = taskRepository.findById(id);
+
+        // If task found return it
+        if(task.isPresent()){
+            return task.get();
+        }
+
+        // If not found return null (temporary - we will improve later)
+        return null;
+    }
 }

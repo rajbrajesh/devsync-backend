@@ -4,11 +4,7 @@ import com.brajesh.devsync.dto.TaskRequestDto;
 import com.brajesh.devsync.entity.Task;
 import com.brajesh.devsync.service.TaskService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.springframework.web.bind.annotation.PostMapping; //imports for post services.
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -29,6 +25,16 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
+    // Get task by ID
+    @GetMapping("/api/tasks/{id}")
+    public Task getTaskById(@PathVariable Integer id){
+
+        // PathVariable takes value from URL
+        // Example: /api/tasks/5 → id = 5
+
+        return taskService.getTaskById(id);
+    }
+
     // API to create a new task
     @PostMapping("/api/tasks")
     public Task addTask(@Valid @RequestBody TaskRequestDto dto) {
@@ -40,4 +46,5 @@ public class TaskController {
 
         return taskService.addTask(task);
     }
+
 }
