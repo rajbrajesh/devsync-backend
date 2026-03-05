@@ -47,4 +47,12 @@ public class TaskController {
         return taskService.addTask(task);
     }
 
+    // Update task by ID
+    @PutMapping("/api/tasks/{id}")
+    public Task updateTask(
+            @PathVariable Integer id,
+            @Valid @RequestBody TaskRequestDto dto
+    ) {
+        return taskService.updateTask(id, dto);
+    }
 }

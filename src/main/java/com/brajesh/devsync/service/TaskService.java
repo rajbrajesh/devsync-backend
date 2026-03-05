@@ -1,5 +1,6 @@
 package com.brajesh.devsync.service;
 
+import com.brajesh.devsync.dto.TaskRequestDto;
 import com.brajesh.devsync.entity.Task;
 import com.brajesh.devsync.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,20 @@ public class TaskService {
 
         // If not found return null (temporary - we will improve later)
         return null;
+    }
+
+    // Update existing task
+    public Task updateTask(Integer id, TaskRequestDto dto) {
+
+        // Step 1: Find task from database
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        // Step 2: Update fields
+        task.setTitle(dto.getTitle());
+        task.setPlatform(dto.getPlatform());
+
+        // Step 3: Save updated task
+        return taskRepository.save(task);
     }
 }
