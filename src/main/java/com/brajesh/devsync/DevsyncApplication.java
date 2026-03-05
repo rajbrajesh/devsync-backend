@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DevsyncApplication {
 
 	public static void main(String[] args) {
+		// Starts Spring Boot Application
 		SpringApplication.run(DevsyncApplication.class, args);
 	}
 

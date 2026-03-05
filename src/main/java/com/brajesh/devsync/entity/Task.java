@@ -1,4 +1,4 @@
-package com.brajesh.devsync.model;
+package com.brajesh.devsync.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
