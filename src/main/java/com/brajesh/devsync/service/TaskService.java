@@ -2,6 +2,7 @@ package com.brajesh.devsync.service;
 
 import com.brajesh.devsync.dto.TaskRequestDto;
 import com.brajesh.devsync.entity.Task;
+import com.brajesh.devsync.exception.TaskNotFoundException;
 import com.brajesh.devsync.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,18 +33,10 @@ public class TaskService {
     // Get single task using ID
     public Task getTaskById(Integer id){
 
-        // findById returns Optional
-        // Optional is used because record may or may not exist
+        System.out.println("Fetching task with id: " + id);
 
-        Optional<Task> task = taskRepository.findById(id);
-
-        // If task found return it
-        if(task.isPresent()){
-            return task.get();
-        }
-
-        // If not found return null (temporary - we will improve later)
-        return null;
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + id));
     }
 
     // Update existing task
@@ -51,7 +44,7 @@ public class TaskService {
 
         // Step 1: Find task from database
         Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found"));
+                .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + id));
 
         // Step 2: Update fields
         task.setTitle(dto.getTitle());
