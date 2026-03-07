@@ -6,6 +6,11 @@ import com.brajesh.devsync.exception.TaskNotFoundException;
 import com.brajesh.devsync.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+//imports for pagination
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+
 //imports for Logging
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,5 +84,13 @@ public class TaskService {
 
         // Delete task
         taskRepository.delete(task);
+    }
+
+    //Pagination implemented for fetching the task
+    public Page<Task> getTasks(Pageable pageable){
+
+        logger.info("Fetching tasks with pagination");
+
+        return taskRepository.findAll(pageable);
     }
 }

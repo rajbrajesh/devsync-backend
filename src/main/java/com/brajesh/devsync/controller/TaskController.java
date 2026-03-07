@@ -6,6 +6,9 @@ import com.brajesh.devsync.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.*;
 
 @RestController
@@ -63,5 +66,12 @@ public class TaskController {
         taskService.deleteTask(id);
 
         return "Task deleted successfully";
+    }
+
+    //Api to fetch all task by pagenation
+    @GetMapping("/api/tasks/paginated")
+    public Page<Task> getTasks(Pageable pageable){
+
+        return taskService.getTasks(pageable);
     }
 }
