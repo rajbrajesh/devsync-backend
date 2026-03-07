@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -74,5 +75,12 @@ public class TaskController {
     public Page<Task> getTasks(Pageable pageable){
 
         return taskService.getTasks(pageable);
+    }
+
+    //Api to serch task by platform
+    @GetMapping("/search")
+    public List<Task> searchTasks(@RequestParam String platform){
+
+        return taskService.getTasksByPlatform(platform);
     }
 }

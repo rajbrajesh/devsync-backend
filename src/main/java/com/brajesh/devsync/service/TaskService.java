@@ -93,4 +93,12 @@ public class TaskService {
 
         return taskRepository.findAll(pageable);
     }
+
+    //search by platform
+    public List<Task> getTasksByPlatform(String platform){
+
+        logger.info("Searching tasks for platform {}", platform);
+
+        return taskRepository.findByPlatform(platform);
+    }
 }
