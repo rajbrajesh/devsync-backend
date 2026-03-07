@@ -83,4 +83,21 @@ public class TaskController {
 
         return taskService.getTasksByPlatform(platform);
     }
+
+    // API endpoint to filter tasks based on platform and title
+    @GetMapping("/filter")
+    public List<Task> filterTasks(
+
+            // Reads platform from query parameter
+            // Example: ?platform=LeetCode
+            @RequestParam String platform,
+
+            // Reads title from query parameter
+            // Example: ?title=Graph
+            @RequestParam String title
+    ){
+
+        // Calls service layer to perform filtering
+        return taskService.filterTasks(platform, title);
+    }
 }

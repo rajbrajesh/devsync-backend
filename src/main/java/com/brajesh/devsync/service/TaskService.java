@@ -101,4 +101,14 @@ public class TaskService {
 
         return taskRepository.findByPlatform(platform);
     }
+
+    // Service method to filter tasks using platform and title
+    public List<Task> filterTasks(String platform, String title){
+
+        // Logging helps track API activity in production
+        logger.info("Filtering tasks for platform {} and title {}", platform, title);
+
+        // Calling repository method to fetch filtered tasks
+        return taskRepository.findByPlatformAndTitle(platform, title);
+    }
 }
