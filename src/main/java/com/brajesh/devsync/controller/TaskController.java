@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.*;
 
 @RestController
+@RequestMapping("/api/tasks")
 public class TaskController {
 
     // Service layer object
@@ -23,13 +24,13 @@ public class TaskController {
     }
 
     // API to fetch all tasks
-    @GetMapping("/api/tasks")
+    @GetMapping
     public List<Task> getTasks(){
         return taskService.getAllTasks();
     }
 
     // Get task by ID
-    @GetMapping("/api/tasks/{id}")
+    @GetMapping("/{id}")
     public Task getTaskById(@PathVariable int id){
 
         // PathVariable takes value from URL
@@ -39,7 +40,7 @@ public class TaskController {
     }
 
     // API to create a new task
-    @PostMapping("/api/tasks")
+    @PostMapping
     public Task addTask(@Valid @RequestBody TaskRequestDto dto) {
 
         // Convert DTO -> Entity
@@ -51,7 +52,7 @@ public class TaskController {
     }
 
     // Update task by ID
-    @PutMapping("/api/tasks/{id}")
+    @PutMapping("/{id}")
     public Task updateTask(
             @PathVariable Integer id,
             @Valid @RequestBody TaskRequestDto dto
@@ -60,7 +61,7 @@ public class TaskController {
     }
 
     // Delete task by ID
-    @DeleteMapping("/api/tasks/{id}")
+    @DeleteMapping("/{id}")
     public String deleteTask(@PathVariable int id){
 
         taskService.deleteTask(id);
@@ -69,7 +70,7 @@ public class TaskController {
     }
 
     //Api to fetch all task by pagenation
-    @GetMapping("/api/tasks/paginated")
+    @GetMapping("/paginated")
     public Page<Task> getTasks(Pageable pageable){
 
         return taskService.getTasks(pageable);
