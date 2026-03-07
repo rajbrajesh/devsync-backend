@@ -27,7 +27,7 @@ public class TaskController {
 
     // Get task by ID
     @GetMapping("/api/tasks/{id}")
-    public Task getTaskById(@PathVariable Integer id){
+    public Task getTaskById(@PathVariable int id){
 
         // PathVariable takes value from URL
         // Example: /api/tasks/5 → id = 5
@@ -58,7 +58,7 @@ public class TaskController {
 
     // Delete task by ID
     @DeleteMapping("/api/tasks/{id}")
-    public String deleteTask(@PathVariable Integer id){
+    public String deleteTask(@PathVariable int id){
 
         taskService.deleteTask(id);
 

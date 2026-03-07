@@ -8,7 +8,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @NotBlank(message = "Title cannot be empty")
     private String title;
