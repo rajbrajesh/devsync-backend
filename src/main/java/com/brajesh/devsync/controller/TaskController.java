@@ -37,7 +37,7 @@ public class TaskController {
     public Task getTaskById(@PathVariable int id){
 
         // PathVariable takes value from URL
-        // Example: /api/tasks/5 → id = 5
+        // Example: /api/tasks/5 - id = 5
 
         return taskService.getTaskById(id);
     }
