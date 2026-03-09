@@ -4,6 +4,7 @@ import com.brajesh.devsync.dto.TaskRequestDto;
 import com.brajesh.devsync.dto.TaskResponseDto;
 import com.brajesh.devsync.entity.Task;
 import com.brajesh.devsync.service.TaskService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class TaskController {
     }
 
     // API to fetch all tasks
+    @Operation(summary = "Fetch all tasks from database")
     @GetMapping
     public List<TaskResponseDto> getTasks(){
         // Returning DTO response instead of entity
@@ -43,6 +45,7 @@ public class TaskController {
     }
 
     // API to create a new task
+    @Operation(summary = "Create a new coding task")
     @PostMapping
     public Task addTask(@Valid @RequestBody TaskRequestDto dto) {
 
