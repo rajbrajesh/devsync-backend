@@ -12,8 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.*;
 
+@Tag(name = "Task APIs", description = "APIs for managing tasks in DevSync")
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -27,7 +31,9 @@ public class TaskController {
     }
 
     // API to fetch all tasks
-    @Operation(summary = "Fetch all tasks from database")
+    @Operation(summary = "Get all tasks",
+            description = "Fetch all tasks with pagination support"
+    )
     @GetMapping
     public List<TaskResponseDto> getTasks(){
         // Returning DTO response instead of entity
@@ -35,6 +41,10 @@ public class TaskController {
     }
 
     // Get task by ID
+    @Operation(
+            summary = "Get task by ID",
+            description = "Fetch a single task using its ID"
+    )
     @GetMapping("/{id}")
     public Task getTaskById(@PathVariable int id){
 
@@ -45,7 +55,10 @@ public class TaskController {
     }
 
     // API to create a new task
-    @Operation(summary = "Create a new coding task")
+    @Operation(
+            summary = "Create new task",
+            description = "Add a new task to the system"
+    )
     @PostMapping
     public Task addTask(@Valid @RequestBody TaskRequestDto dto) {
 
@@ -58,6 +71,10 @@ public class TaskController {
     }
 
     // Update task by ID
+    @Operation(
+            summary = "Update task",
+            description = "Update an existing task"
+    )
     @PutMapping("/{id}")
     public Task updateTask(
             @PathVariable Integer id,
@@ -67,6 +84,10 @@ public class TaskController {
     }
 
     // Delete task by ID
+    @Operation(
+            summary = "Delete task",
+            description = "Delete a task by ID"
+    )
     @DeleteMapping("/{id}")
     public String deleteTask(@PathVariable int id){
 
