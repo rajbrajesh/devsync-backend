@@ -1,6 +1,7 @@
 package com.brajesh.devsync.service;
 
 import com.brajesh.devsync.dto.TaskRequestDto;
+import com.brajesh.devsync.dto.TaskResponseDto;
 import com.brajesh.devsync.entity.Task;
 import com.brajesh.devsync.exception.TaskNotFoundException;
 import com.brajesh.devsync.repository.TaskRepository;
@@ -31,11 +32,30 @@ public class TaskService {
     }
 
     // Fetch all tasks
-    public List<Task> getAllTasks() {
+    // Returns list of TaskResponseDto instead of entity
+    public List<TaskResponseDto> getAllTasks() {
 
-        logger.info("Fetching all task from database");
+        logger.info("Fetching all task");
 
-        return taskRepository.findAll();
+        // Fetching tasks from database
+        List<Task> tasks = taskRepository.findAll();
+
+        // Convert entity list to DTO list
+        List<TaskResponseDto> responseList = new ArrayList<>();
+
+        for(Task task : tasks){
+
+            // Creating DTO object for each entity
+            TaskResponseDto dto = new TaskResponseDto(
+                    task.getId(),
+                    task.getTitle(),
+                    task.getPlatform()
+            );
+
+            responseList.add(dto);
+        }
+
+        return responseList;
     }
 
     // Add new task  - Save task to DB

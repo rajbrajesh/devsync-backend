@@ -1,6 +1,7 @@
 package com.brajesh.devsync.controller;
 
 import com.brajesh.devsync.dto.TaskRequestDto;
+import com.brajesh.devsync.dto.TaskResponseDto;
 import com.brajesh.devsync.entity.Task;
 import com.brajesh.devsync.service.TaskService;
 import jakarta.validation.Valid;
@@ -26,7 +27,8 @@ public class TaskController {
 
     // API to fetch all tasks
     @GetMapping
-    public List<Task> getTasks(){
+    public List<TaskResponseDto> getTasks(){
+        // Returning DTO response instead of entity
         return taskService.getAllTasks();
     }
 
