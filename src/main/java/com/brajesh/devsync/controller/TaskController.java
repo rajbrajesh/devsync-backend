@@ -126,4 +126,21 @@ public class TaskController {
         // Calls service layer to perform filtering
         return taskService.filterTasks(platform, title);
     }
+
+    // API to search tasks using title or platform filters
+    @Operation(
+            summary = "Search tasks",
+            description = "Search tasks using title and platform filters"
+    )
+    @GetMapping("/search/advanced")
+    public List<TaskResponseDto> searchTasks(
+
+            // optional query parameter
+            @RequestParam(required = false) String title,
+
+            // optional query parameter
+            @RequestParam(required = false) String platform
+    ){
+        return taskService.searchTasks(title, platform);
+    }
 }

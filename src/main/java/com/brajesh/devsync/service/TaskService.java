@@ -131,4 +131,46 @@ public class TaskService {
         // Calling repository method to fetch filtered tasks
         return taskRepository.findByPlatformAndTitle(platform, title);
     }
+
+    // Method to perform dynamic search
+    public List<TaskResponseDto> searchTasks(String title, String platform){
+
+        List<Task> tasks;
+
+        // Case 1 → both title and platform present
+        if(title != null && platform != null){
+            tasks = taskRepository.findByTitleContainingIgnoreCaseAndPlatform(title, platform);
+        }
+
+        // Case 2 → only title present
+        else if(title != null){
+            tasks = taskRepository.findByTitleContainingIgnoreCase(title);
+        }
+
+        // Case 3 → only platform present
+        else if(platform != null){
+            tasks = taskRepository.findByPlatform(platform);
+        }
+
+        // Case 4 → no filter → return all tasks
+        else{
+            tasks = taskRepository.findAll();
+        }
+
+        // Convert Entity → DTO
+        List<TaskResponseDto> response = new ArrayList<>();
+
+        for(Task task : tasks){
+
+            TaskResponseDto dto = new TaskResponseDto(
+                    task.getId(),
+                    task.getTitle(),
+                    task.getPlatform()
+            );
+
+            response.add(dto);
+        }
+
+        return response;
+    }
 }

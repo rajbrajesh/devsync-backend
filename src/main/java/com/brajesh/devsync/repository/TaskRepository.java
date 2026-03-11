@@ -12,4 +12,10 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     // This method will automatically generate SQL query
     // SELECT * FROM task WHERE platform = ? AND title = ?
     List<Task> findByPlatformAndTitle(String platform, String title);
+
+    // Search tasks by title (partial match + case insensitive)
+    List<Task> findByTitleContainingIgnoreCase(String title);
+
+    // Search tasks by both title and platform
+    List<Task> findByTitleContainingIgnoreCaseAndPlatform(String title, String platform);
 }
