@@ -1,24 +1,36 @@
-# DevSync - Task Management Backend
+# DevSync 🚀
 
-DevSync is a Spring Boot backend application designed to manage coding tasks across platforms like LeetCode, Codeforces, and GeeksforGeeks.
-
+DevSync is a backend application that helps developers track coding problems from multiple platforms in one place.
 ## Tech Stack
-- Java 17
+- Java 
 - Spring Boot
 - Spring Data JPA
 - PostgreSQL
 - Maven
 - SLF4J Logging
+- Swagger (OpenAPI)
 
 ## Features
-- Create Task
-- Get All Tasks
-- Get Task By ID
-- Update Task
-- Delete Task
-- Pagination & Sorting
-- Global Exception Handling
-- Logging
+- Create, Update, Delete tasks
+- Pagination support
+- Search tasks
+- Advanced filtering
+- Sorting API
+- DTO architecture
+- Global exception handling
+- Validation
+- API documentation using Swagger
+
+
+## API Documentation
+
+Swagger UI available at:
+http://localhost:8080/swagger-ui/index.html
+
+## Architecture
+
+Controller → Service → Repository → Database
+
 
 ## API Endpoints
 
@@ -35,23 +47,43 @@ GET /api/tasks/paginated?page=0&size=5
 
 POST /api/tasks
 
-Request Body
-
+Request Body :
+``
 {
 "title":"Dynamic Programming",
 "platform":"LeetCode"
 }
+``
 
 ## Project Structure
-controller
-service
-repository
-entity
-dto
-exception
+```
+src/main/java/com/brajesh/devsync
+│
+├── controller
+│       TaskController
+│
+├── service
+│       TaskService
+│
+├── repository
+│       TaskRepository
+│
+├── entity
+│       Task
+│
+├── dto
+│       TaskRequestDto
+│       TaskResponseDto
+│
+├── exception
+│       GlobalExceptionHandler
+│       ErrorResponse
+```
 
 ## Future Improvements
-- Search API
-- Swagger Documentation
-- JWT Authentication
-- Frontend Integration
+- React Frontend
+- Authentication (JWT)
+- Multi platform integrations
+
+## API Preview
+![img.png](img.png)
