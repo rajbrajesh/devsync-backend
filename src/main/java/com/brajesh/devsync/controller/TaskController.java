@@ -70,6 +70,7 @@ public class TaskController {
         return taskService.addTask(task);
     }
 
+
     // Update task by ID
     @Operation(
             summary = "Update task",
@@ -82,6 +83,7 @@ public class TaskController {
     ) {
         return taskService.updateTask(id, dto);
     }
+
 
     // Delete task by ID
     @Operation(
@@ -96,6 +98,7 @@ public class TaskController {
         return "Task deleted successfully";
     }
 
+
     //Api to fetch all task by pagenation
     @GetMapping("/paginated")
     public Page<Task> getTasks(Pageable pageable){
@@ -103,12 +106,14 @@ public class TaskController {
         return taskService.getTasks(pageable);
     }
 
+
     //Api to serch task by platform
     @GetMapping("/search")
     public List<Task> searchTasks(@RequestParam String platform){
 
         return taskService.getTasksByPlatform(platform);
     }
+
 
     // API endpoint to filter tasks based on platform and title
     @GetMapping("/filter")
@@ -143,4 +148,19 @@ public class TaskController {
     ){
         return taskService.searchTasks(title, platform);
     }
+
+    // API to fetch tasks sorted by a field
+    @Operation(
+            summary = "Get sorted tasks",
+            description = "Fetch tasks sorted by title or platform"
+    )
+    @GetMapping("/sorted")
+    public List<TaskResponseDto> getSortedTasks(
+
+            // query parameter example: ?sortBy=title
+            @RequestParam String sortBy
+    ){
+        return taskService.getSortedTasks(sortBy);
+    }
+
 }

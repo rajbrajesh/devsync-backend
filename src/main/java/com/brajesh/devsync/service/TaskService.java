@@ -173,4 +173,30 @@ public class TaskService {
 
         return response;
     }
+
+    // Fetch tasks sorted by a given field
+    public List<TaskResponseDto> getSortedTasks(String sortBy){
+
+        // Fetch tasks sorted from database
+        List<Task> tasks = taskRepository.findAll(
+                org.springframework.data.domain.Sort.by(sortBy)
+        );
+
+        // Convert Entity → DTO
+        List<TaskResponseDto> response = new ArrayList<>();
+
+        for(Task task : tasks){
+
+            TaskResponseDto dto = new TaskResponseDto(
+                    task.getId(),
+                    task.getTitle(),
+                    task.getPlatform()
+            );
+
+            response.add(dto);
+        }
+
+        return response;
+    }
+
 }
