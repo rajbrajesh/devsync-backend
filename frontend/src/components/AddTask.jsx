@@ -58,7 +58,7 @@ function AddTask({ onTaskAdded }) {
 
         <input
           type="text"
-          placeholder="Platform (Leetcode / Codeforces)"
+          placeholder="Platform (Coding platform Name)"
           value={platform}
           onChange={(e) => setPlatform(e.target.value)}
           required
