@@ -16,3 +16,27 @@ export async function fetchTasks() {
 
     return response.json();
 }
+
+/**
+ * Create a new task
+ */
+export async function createTask(task) {
+
+  const response = await fetch(BASE_URL, {
+
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify(task)
+
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create task");
+  }
+
+  return response.json();
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchTasks } from "../api/taskApi";
+import AddTask from "../components/AddTask";
 
 /**
  * TaskList Component
@@ -33,7 +34,9 @@ function TaskList() {
   return (
 
     <div>
-
+    
+      <AddTask onTaskAdded={loadTasks} />
+     
       <h2>Task List</h2>
 
       {tasks.length === 0 ? (
