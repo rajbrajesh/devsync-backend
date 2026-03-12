@@ -20,6 +20,7 @@ import java.util.*;
 @Tag(name = "Task APIs", description = "APIs for managing tasks in DevSync")
 @RestController
 @RequestMapping("/api/tasks")
+@CrossOrigin(origins = "http://localhost:5173")   //to connect with React
 public class TaskController {
 
     // Service layer object
