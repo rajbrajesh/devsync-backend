@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import TaskList from "./pages/TaskList";
 
 // Root component of DevSync frontend
 // This component loads the main UI of our application
@@ -9,6 +10,7 @@ import './App.css'
 function App() {
 
   return (
+    <>
     <div style={{padding:"40px"}}>
 
       {/* Application Title */}
@@ -18,6 +20,8 @@ function App() {
       <p>Track coding problems across multiple platforms</p>
 
     </div>
+    <TaskList/>
+    </>
   )
 
 }
