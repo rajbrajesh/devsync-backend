@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+
+
 /**
  * Sidebar Component
  * Left navigation menu for dashboard
@@ -16,16 +19,30 @@ function Sidebar() {
         color: "#1e293b"
       }}
     >
+      {/* Sidebar title */}
+      <h3>Menu</h3>
 
       {/* Navigation links */}
 
-      <p style={{cursor:"pointer"}}>Dashboard</p>
+      {/* Dashboard link */}
+      <Link to="/dashboard" style={{display:"block", marginBottom:"10px"}}>
+        Dashboard
+      </Link>
 
-      <p style={{cursor:"pointer"}}>Tasks</p>
+      {/* Tasks link */}
+      <Link to="/tasks" style={{display:"block", marginBottom:"10px"}}>
+        Tasks
+      </Link>
 
-      <p style={{cursor:"pointer"}}>Analytics</p>
+      {/* Analytics link */}
+      <Link to="/analytics" style={{display:"block", marginBottom:"10px"}}>
+        Analytics
+      </Link>
 
-      <p style={{cursor:"pointer"}}>Settings</p>
+      {/* Settings link */}
+      <Link to="/settings" style={{display:"block"}}>
+        Settings
+      </Link>
 
     </div>
 
