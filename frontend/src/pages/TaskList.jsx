@@ -146,25 +146,17 @@ function TaskList() {
 
               ) : (
 
-                <div>
+                <li className="task-item">
+                  <div className="task-info">
+                    <strong>Title: {task.title}</strong>
+                    <span>Platform: {task.platform}</span>
+                  </div>
 
-                  <strong>{task.title}</strong>
-
-                  <br/>
-
-                  Platform: {task.platform}
-
-                  <br/>
-
-                  <button onClick={() => startEditing(task)}>
-                    Edit
-                  </button>
-
-                  <button onClick={() => handleDelete(task.id)}>
-                    Delete
-                  </button>
-
-                </div>
+                  <div className="task-buttons">
+                    <button onClick={() => startEditing(task)}>Edit</button>
+                    <button onClick={() => handleDelete(task.id)}>Delete</button>
+                  </div>
+                </li>
               )}
             </li>
           ))}

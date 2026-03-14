@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import TaskList from "./pages/TaskList";
+import DashboardLayout from "./components/DashboardLayout";
+
 
 // Root component of DevSync frontend
 // This component loads the main UI of our application
@@ -10,18 +12,12 @@ import TaskList from "./pages/TaskList";
 function App() {
 
   return (
-    <>
-    <div style={{padding:"40px"}}>
+    <DashboardLayout>
 
-      {/* Application Title */}
-      <h1>DevSync Dashboard</h1>
+      {/* Task page inside dashboard layout */}
+      <TaskList />
 
-      {/* Short description */}
-      <p>Track coding problems across multiple platforms</p>
-
-    </div>
-    <TaskList/>
-    </>
+    </DashboardLayout>
   )
 
 }
