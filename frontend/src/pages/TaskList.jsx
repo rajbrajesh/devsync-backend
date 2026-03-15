@@ -11,6 +11,9 @@ function TaskList() {
   // React state to store tasks from backend
   const [tasks, setTasks] = useState([]);
 
+  // search input value
+  const [searchTerm,setSearchTerm] = useState("")
+
   // stores task currently being edited
   const [editingTaskId, setEditingTaskId] = useState(null);
 
@@ -107,7 +110,25 @@ function TaskList() {
   return (
 
     <div>
-    
+
+      {/* Search Bar */}
+      <div style={{marginBottom:"20px"}}>
+        <input
+          type="text"
+          placeholder="Search tasks..."
+          value={searchTerm}
+
+          onChange={(e)=>setSearchTerm(e.target.value)}
+
+          style={{
+            padding:"8px",
+            width:"250px",
+            borderRadius:"5px",
+            border:"1px solid #ccc"
+          }}
+        />
+      </div>
+
       {/* Component for adding new task */}
       <AddTask onTaskAdded={loadTasks} />
      
@@ -122,8 +143,9 @@ function TaskList() {
 
         <ul>
 
-          {tasks.map((task) => (
-
+          {tasks.filter(task =>
+            task.title.toLowerCase().includes(searchTerm.toLowerCase()))
+            .map((task) => (
             <li key={task.id}>
 
               {editingTaskId === task.id ? (
