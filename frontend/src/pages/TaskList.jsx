@@ -14,6 +14,10 @@ function TaskList() {
   // search input value
   const [searchTerm,setSearchTerm] = useState("")
 
+  // platform filter state
+  const [platformFilter,setPlatformFilter] = useState("All")
+
+
   // stores task currently being edited
   const [editingTaskId, setEditingTaskId] = useState(null);
 
@@ -127,6 +131,30 @@ function TaskList() {
             border:"1px solid #ccc"
           }}
         />
+
+        {/* Platform Filter */}
+        <select
+        value={platformFilter}
+
+        onChange={(e)=>setPlatformFilter(e.target.value)}
+
+        style={{
+          marginLeft:"10px",
+          padding:"8px",
+          borderRadius:"5px"
+        }}
+        >
+
+        <option value="All">All Platforms</option>
+
+        <option value="Leetcode">Leetcode</option>
+
+        <option value="Codechef">Codechef</option>
+
+        <option value="Codeforces">Codeforces</option>
+
+        <option value="GeeksForGeeks">GeeksForGeeks</option>
+        </select>
       </div>
 
       {/* Component for adding new task */}
@@ -143,8 +171,10 @@ function TaskList() {
 
         <ul>
 
-          {tasks.filter(task =>
-            task.title.toLowerCase().includes(searchTerm.toLowerCase()))
+          {tasks
+          .filter(task =>
+            task.title.toLowerCase().includes(searchTerm.toLowerCase())
+            && (platformFilter === "All" || task.platform === platformFilter))
             .map((task) => (
             <li key={task.id}>
 

@@ -52,24 +52,21 @@ function AddTask({ onTaskAdded }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
+          style={{padding:"10px", gap:"20px",margin:"10px"}}
         />
-
-        <br/><br/>
-
+        
         <input
           type="text"
           placeholder="Platform (Coding platform Name)"
           value={platform}
           onChange={(e) => setPlatform(e.target.value)}
           required
+          style={{padding:"10px", gap:"20px",margin:"10px"}}
         />
-
-        <br/><br/>
-
-        <button type="submit">
+        
+        <button type="submit" style={{padding:"10px", gap:"20px",margin:"10px"}}>
           Add Task
         </button>
-
       </form>
 
     </div>
