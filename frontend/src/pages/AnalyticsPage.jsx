@@ -41,6 +41,16 @@ function AnalyticsPage(){
  */
  const [chartData,setChartData] = useState({})
 
+ // total number of tasks
+const [totalTasks,setTotalTasks] = useState(0)
+
+// number of unique platforms
+const [platformCount,setPlatformCount] = useState(0)
+
+// latest task title
+const [latestTask,setLatestTask] = useState("")
+
+
  /*
  Fetch tasks from backend
  Then calculate platform distribution
@@ -83,6 +93,28 @@ function AnalyticsPage(){
 
        })
 
+       /* total number of tasks */
+        setTotalTasks(data.length)
+
+      // platform distribution object
+        const platformMap = {}
+
+      data.forEach(task => {
+        if(platformMap[task.platform]){
+          platformMap[task.platform]++
+        }else{
+          platformMap[task.platform] = 1
+       }
+      })
+
+        // number of unique platforms
+      setPlatformCount(Object.keys(platformMap).length)
+
+        // latest task
+      if(data.length > 0){
+        setLatestTask(data[data.length - 1].title)
+      }
+
        /*
        Prepare chart data
        */
@@ -111,6 +143,52 @@ function AnalyticsPage(){
 
      {/* Page title */}
      <h2>Task Analytics</h2>
+     {/* Summary Cards */}
+
+      <div style={{
+      display:"flex",
+      gap:"20px",
+      marginBottom:"30px"
+      }}>
+
+      {/* Total Tasks Card */}
+      <div style={{
+        background:"#f4f4f4",
+        padding:"20px",
+        borderRadius:"8px",
+        width:"150px",
+        color:"black"
+      }}>
+        <h4>Total Tasks</h4>
+        <p>{totalTasks}</p>
+      </div>
+
+      {/* Platforms Card */}
+      <div style={{
+        background:"#f4f4f4",
+        padding:"20px",
+        borderRadius:"8px",
+        width:"150px",
+        color:"black"
+      }}>
+        <h4>Platforms</h4>
+        <p>{platformCount}</p>
+      </div>
+
+      {/* Latest Task Card */}
+      <div style={{
+        background:"#f4f4f4",
+        padding:"20px",
+        borderRadius:"8px",
+        width:"200px",
+        color:"black"
+      }}>
+        <h4>Latest Task</h4>
+        <p>{latestTask}</p>
+      </div>
+
+      </div>
+
 
      {/* Chart container */}
 
