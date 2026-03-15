@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
-
-/**
- * Sidebar Component
- * Left navigation menu for dashboard
- */
+/*
+ Sidebar Navigation Component
+ Used to navigate between pages
+ Also highlights active page
+*/
 
 function Sidebar() {
 
@@ -12,42 +12,72 @@ function Sidebar() {
 
     <div
       style={{
-        width: "200px",
-        backgroundColor: "#f1f5f9",
+        width: "220px",
+        backgroundColor: "#e2e8f0",
         padding: "20px",
         height: "100vh",
         color: "#1e293b"
       }}
     >
+
       {/* Sidebar title */}
       <h3>Menu</h3>
 
-      {/* Navigation links */}
-
-      {/* Dashboard link */}
-      <Link to="/dashboard" style={{display:"block", marginBottom:"10px"}}>
+      {/* Dashboard navigation */}
+      <NavLink
+        to="/dashboard"
+        style={({ isActive }) => ({
+          display: "block",
+          marginBottom: "10px",
+          fontWeight: isActive ? "bold" : "normal",
+          color: isActive ? "blue" : "black"
+        })}
+      >
         Dashboard
-      </Link>
+      </NavLink>
 
-      {/* Tasks link */}
-      <Link to="/tasks" style={{display:"block", marginBottom:"10px"}}>
+      {/* Tasks navigation */}
+      <NavLink
+        to="/tasks"
+        style={({ isActive }) => ({
+          display: "block",
+          marginBottom: "10px",
+          fontWeight: isActive ? "bold" : "normal",
+          color: isActive ? "blue" : "black"
+        })}
+      >
         Tasks
-      </Link>
+      </NavLink>
 
-      {/* Analytics link */}
-      <Link to="/analytics" style={{display:"block", marginBottom:"10px"}}>
+      {/* Analytics navigation */}
+      <NavLink
+        to="/analytics"
+        style={({ isActive }) => ({
+          display: "block",
+          marginBottom: "10px",
+          fontWeight: isActive ? "bold" : "normal",
+          color: isActive ? "blue" : "black"
+        })}
+      >
         Analytics
-      </Link>
+      </NavLink>
 
-      {/* Settings link */}
-      <Link to="/settings" style={{display:"block"}}>
+      {/* Settings navigation */}
+      <NavLink
+        to="/settings"
+        style={({ isActive }) => ({
+          display: "block",
+          fontWeight: isActive ? "bold" : "normal",
+          color: isActive ? "blue" : "black"
+        })}
+      >
         Settings
-      </Link>
+      </NavLink>
 
     </div>
 
-  );
+  )
 
 }
 
-export default Sidebar;
+export default Sidebar
