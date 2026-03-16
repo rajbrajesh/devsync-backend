@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchTasks, deleteTask, updateTask} from "../api/taskApi";
-import AddTask from "../components/AddTask";
+import AddTask from "../components/task/AddTask";
 
 /**
  * TaskList Component
