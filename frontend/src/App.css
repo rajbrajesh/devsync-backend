@@ -40,3 +40,34 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* Grid container for platform cards */
+.platform-grid {
+  display: grid;
+
+  /* Create responsive columns */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  gap: 20px; /* space between cards */
+  margin-top: 20px;
+}
+
+/* Individual card styling */
+.platform-card {
+  background-color: #cecbcb;
+  padding: 20px;
+  border-radius: 12px;
+  color: black;
+
+  /* shadow for card effect */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  /* smooth hover effect */
+  transition: transform 0.2s ease;
+}
+
+/* Hover animation */
+.platform-card:hover {
+  transform: translateY(-5px);
+}

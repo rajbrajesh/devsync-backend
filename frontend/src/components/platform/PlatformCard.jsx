@@ -36,8 +36,8 @@ const PlatformCard = ({ name, description }) => {
       <div className="platform-stats">
 
         {/* Example stats placeholders */}
-        <p>Rank: --</p>
-        <p>Problems Solved: --</p>
+        <p><strong>Rank:</strong> --</p>
+        <p><strong>Problems Solved:</strong> --</p>
 
       </div>
 
