@@ -5,7 +5,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import TaskList from "./pages/TaskList";
-import DashboardLayout from "./components/DashboardLayout";
+import DashboardLayout from "./components/layout/DashboardLayout";
 
 import DashboardPage from "./pages/DashboardPage"
 import TasksPage from "./pages/TasksPage"

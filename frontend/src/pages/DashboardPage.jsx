@@ -2,19 +2,13 @@
  DashboardPage
  Landing page of DevSync
 */
+import PlatformGrid from "../components/platform/PlatformGrid";
 
 function DashboardPage(){
 
   return(
 
-    <div>
-
-      <h1>Dashboard</h1>
-
-      <p>Welcome to DevSync Dashboard</p>
-
-    </div>
-
+    <PlatformGrid />
   )
 
 }
