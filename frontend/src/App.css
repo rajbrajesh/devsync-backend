@@ -113,3 +113,30 @@
 .learning-card:hover {
  transform: translateY(-5px);
 }
+
+
+/* Platform links grid */
+.platform-link-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+ gap: 20px;
+ margin-top: 20px;
+}
+
+/* Card */
+.platform-link-card {
+ background-color: #333;
+ padding: 20px;
+ border-radius: 12px;
+ text-align: center;
+
+ cursor: pointer;
+
+ box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+ transition: transform 0.2s ease;
+}
+
+.platform-link-card:hover {
+ transform: translateY(-5px);
+}
