@@ -1,5 +1,7 @@
 package com.brajesh.devsync.controller;
 
+import com.brajesh.devsync.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.brajesh.devsync.dto.TaskRequestDto;
 import com.brajesh.devsync.dto.TaskResponseDto;
 import com.brajesh.devsync.entity.Task;
@@ -26,6 +28,10 @@ public class TaskController {
     // Service layer object
     private final TaskService taskService;
 
+    // Inject repository (Spring automatically object create karega)
+    @Autowired
+    private TaskRepository taskRepository;
+
     // Constructor Injection (Spring automatically injects TaskService)
     public TaskController(TaskService taskService){
         this.taskService = taskService;
@@ -47,7 +53,7 @@ public class TaskController {
             description = "Fetch a single task using its ID"
     )
     @GetMapping("/{id}")
-    public Task getTaskById(@PathVariable int id){
+    public Task getTaskById(@PathVariable Long id){
 
         // PathVariable takes value from URL
         // Example: /api/tasks/5 - id = 5
@@ -79,7 +85,7 @@ public class TaskController {
     )
     @PutMapping("/{id}")
     public Task updateTask(
-            @PathVariable int id,
+            @PathVariable Long id,
             @Valid @RequestBody TaskRequestDto dto
     ) {
         return taskService.updateTask(id, dto);
@@ -92,7 +98,7 @@ public class TaskController {
             description = "Delete a task by ID"
     )
     @DeleteMapping("/{id}")
-    public String deleteTask(@PathVariable int id){
+    public String deleteTask(@PathVariable Long id){
 
         taskService.deleteTask(id);
 
@@ -162,6 +168,21 @@ public class TaskController {
             @RequestParam String sortBy
     ){
         return taskService.getSortedTasks(sortBy);
+    }
+
+    // Get summary of tasks
+    // Returns total tasks count
+    @GetMapping("/summary")
+    public Map<String, Long> getTaskSummary() {
+
+        Map<String, Long> summary = new HashMap<>();
+
+        // total tasks count
+        long total = taskRepository.count();
+
+        summary.put("total", total);
+
+        return summary;
     }
 
 }

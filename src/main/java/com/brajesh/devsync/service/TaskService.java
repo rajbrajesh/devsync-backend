@@ -68,7 +68,7 @@ public class TaskService {
     }
 
     // Get single task using ID
-    public Task getTaskById(Integer id){
+    public Task getTaskById(Long id){
 
         logger.info("Fetching task with id: {} ",id);
 
@@ -77,7 +77,7 @@ public class TaskService {
     }
 
     // Update existing task
-    public Task updateTask(Integer id, TaskRequestDto dto) {
+    public Task updateTask(Long id, TaskRequestDto dto) {
 
         logger.info("updating task with id {}",id);
 
@@ -94,7 +94,7 @@ public class TaskService {
     }
 
     // Delete task by ID
-    public void deleteTask(Integer id) {
+    public void deleteTask(Long id) {
 
         logger.info("Deleting task with id {}",id);
 

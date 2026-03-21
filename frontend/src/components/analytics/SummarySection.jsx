@@ -1,50 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SummaryCard from "./SummaryCard";
-
-/*
-SummarySection Component
-
-Purpose:
-Displays all summary cards in a grid
-*/
+import { getTaskSummary } from "../../api/taskApi";
 
 const SummarySection = () => {
 
- // Temporary static data
- // Later this will come from backend API
- const summaryData = [
-   { title: "Total Problems", value: 120 },
-   { title: "Easy", value: 50 },
-   { title: "Medium", value: 40 },
-   { title: "Hard", value: 30 },
- ];
+  // State to store summary data
+  const [summary, setSummary] = useState({
+    total: 0,
+  });
 
- return (
+  // Fetch data when component loads
+  useEffect(() => {
 
-   // Section container
-   <div>
+    const fetchData = async () => {
+      try {
+        const data = await getTaskSummary();
 
-     {/* Section Title */}
-     <h2>Overview</h2>
+        setSummary(data);
 
-     {/* Cards container */}
-     <div className="summary-grid">
+      } catch (error) {
+        console.error("Error fetching summary:", error);
+      }
+    };
 
-       {/* Loop through summary data */}
-       {summaryData.map((item, index) => (
+    fetchData();
 
-         <SummaryCard
-           key={index}
-           title={item.title}
-           value={item.value}
-         />
+  }, []);
 
-       ))}
+  return (
+    <div>
 
-     </div>
+      <h2>Overview</h2>
 
-   </div>
- );
+      <div className="summary-grid">
+
+        <SummaryCard title="Total Problems" value={summary.total} />
+
+      </div>
+
+    </div>
+  );
 };
 
 export default SummarySection;

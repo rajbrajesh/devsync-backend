@@ -94,3 +94,15 @@ export async function updateTask(id, task) {
   return response.json();
 
 }
+
+// Fetch task summary from backend
+export const getTaskSummary = async () => {
+
+  const response = await fetch(`${BASE_URL}/summary`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch summary");
+  }
+
+  return response.json();
+};
