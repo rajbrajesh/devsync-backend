@@ -16,13 +16,17 @@ public class Task {
     @NotBlank(message = "Platform cannot be empty")
     private String platform;
 
+    @NotBlank(message = "Difficulty cannot be empty")
+    private String difficulty;
+
     public Task(){
         // Needed for JSON deserialization
     }
-    public Task(Integer id,String title,String platform){
+    public Task(Integer id,String title,String platform, String difficulty){
         this.id = id;
         this.title = title;
         this.platform = platform;
+        this.difficulty = difficulty;
     }
 
     public int getId(){
@@ -46,5 +50,13 @@ public class Task {
     }
     public void setPlatform(String platform) {
         this.platform = platform;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 }

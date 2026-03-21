@@ -73,6 +73,7 @@ public class TaskController {
         Task task = new Task();
         task.setTitle(dto.getTitle());
         task.setPlatform(dto.getPlatform());
+        task.setDifficulty(dto.getDifficulty());
 
         return taskService.addTask(task);
     }

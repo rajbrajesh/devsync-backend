@@ -49,7 +49,8 @@ public class TaskService {
             TaskResponseDto dto = new TaskResponseDto(
                     task.getId(),
                     task.getTitle(),
-                    task.getPlatform()
+                    task.getPlatform(),
+                    task.getDifficulty()
             );
 
             responseList.add(dto);
@@ -88,6 +89,7 @@ public class TaskService {
         // Step 2: Update fields
         task.setTitle(dto.getTitle());
         task.setPlatform(dto.getPlatform());
+        task.setDifficulty(dto.getDifficulty());
 
         // Step 3: Save updated task
         return taskRepository.save(task);
@@ -165,7 +167,8 @@ public class TaskService {
             TaskResponseDto dto = new TaskResponseDto(
                     task.getId(),
                     task.getTitle(),
-                    task.getPlatform()
+                    task.getPlatform(),
+                    task.getDifficulty()
             );
 
             response.add(dto);
@@ -190,7 +193,8 @@ public class TaskService {
             TaskResponseDto dto = new TaskResponseDto(
                     task.getId(),
                     task.getTitle(),
-                    task.getPlatform()
+                    task.getPlatform(),
+                    task.getDifficulty()
             );
 
             response.add(dto);

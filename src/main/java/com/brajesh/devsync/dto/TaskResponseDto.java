@@ -13,11 +13,14 @@ public class TaskResponseDto {
     // Platform like LeetCode, Codeforces etc
     private String platform;
 
+    private String difficulty;
+
     // Constructor
-    public TaskResponseDto(int id, String title, String platform) {
+    public TaskResponseDto(int id, String title, String platform,String difficulty) {
         this.id = id;
         this.title = title;
         this.platform = platform;
+        this.difficulty = difficulty;
     }
 
     // Getters
@@ -32,4 +35,6 @@ public class TaskResponseDto {
     public String getPlatform() {
         return platform;
     }
+
+    public String getDifficulty(){return difficulty;}
 }

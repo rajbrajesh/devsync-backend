@@ -7,6 +7,9 @@ const SummarySection = () => {
   // State to store summary data
   const [summary, setSummary] = useState({
     total: 0,
+    easy: 0,
+    medium: 0,
+    hard: 0,
   });
 
   // Fetch data when component loads
@@ -35,6 +38,10 @@ const SummarySection = () => {
       <div className="summary-grid">
 
         <SummaryCard title="Total Problems" value={summary.total} />
+        <SummaryCard title="Easy" value={summary.easy} />
+        <SummaryCard title="Medium" value={summary.medium} />
+        <SummaryCard title="Hard" value={summary.hard} />
+
 
       </div>
 

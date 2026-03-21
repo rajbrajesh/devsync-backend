@@ -25,6 +25,8 @@ function TaskList() {
   const [editTitle, setEditTitle] = useState("");
   const [editPlatform, setEditPlatform] = useState("");
 
+  const [editDifficulty, setEditDifficulty] = useState("");
+
   /**
    * useEffect hook
    * Runs when component loads for the first time
@@ -41,6 +43,8 @@ function TaskList() {
     setEditTitle(task.title);
 
     setEditPlatform(task.platform);
+
+    setEditDifficulty(task.difficulty || "");
 }
 
   /**
@@ -93,7 +97,8 @@ function TaskList() {
     await updateTask(editingTaskId, {
 
       title: editTitle,
-      platform: editPlatform
+      platform: editPlatform,
+      difficulty: editDifficulty
 
     });
 
@@ -190,6 +195,14 @@ function TaskList() {
                     onChange={(e) => setEditPlatform(e.target.value)}
                   />
 
+                  <select value={editDifficulty} 
+                  onChange={(e) => setEditDifficulty(e.target.value)}>
+                    <option value="">Select Difficulty</option>
+                    <option value="EASY">Easy</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="HARD">Hard</option>
+                  </select>
+
                   <button onClick={handleUpdate}>
                     Save
                   </button>
@@ -202,6 +215,9 @@ function TaskList() {
                   <div className="task-info">
                     <strong>Title: {task.title}</strong>
                     <span>Platform: {task.platform}</span>
+                    <span className={`badge ${task.difficulty?.toLowerCase()}`}>
+                      {task.difficulty}
+                    </span>
                   </div>
 
                   <div className="task-buttons">

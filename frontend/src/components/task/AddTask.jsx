@@ -11,6 +11,7 @@ function AddTask({ onTaskAdded }) {
 
   const [title, setTitle] = useState("");
   const [platform, setPlatform] = useState("");
+  const [difficulty, setDifficulty] = useState("");
 
   async function handleSubmit(e) {
 
@@ -18,7 +19,8 @@ function AddTask({ onTaskAdded }) {
 
     const newTask = {
       title: title,
-      platform: platform
+      platform: platform,
+      difficulty: difficulty
     };
 
     try {
@@ -28,6 +30,7 @@ function AddTask({ onTaskAdded }) {
       // clear form
       setTitle("");
       setPlatform("");
+      setDifficulty("");
 
       // refresh task list
       onTaskAdded();
@@ -65,6 +68,14 @@ function AddTask({ onTaskAdded }) {
           required
           style={{padding:"10px", gap:"20px",margin:"10px"}}
         />
+        
+        <select value={difficulty}
+        onChange={(e) => setDifficulty(e.target.value)}>
+      <option value="">Select Difficulty</option>
+      <option value="EASY">Easy</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="HARD">Hard</option>
+    </select>
         
         <button type="submit" style={{padding:"10px", gap:"20px",margin:"10px"}}>
           Add Task
