@@ -1,5 +1,7 @@
 package com.brajesh.devsync.dto;
 
+import com.brajesh.devsync.entity.Difficulty;
+
 // DTO used to send task data to client
 // This prevents exposing internal entity structure
 public class TaskResponseDto {
@@ -13,10 +15,10 @@ public class TaskResponseDto {
     // Platform like LeetCode, Codeforces etc
     private String platform;
 
-    private String difficulty;
+    private Difficulty difficulty;
 
     // Constructor
-    public TaskResponseDto(int id, String title, String platform,String difficulty) {
+    public TaskResponseDto(int id, String title, String platform,Difficulty difficulty) {
         this.id = id;
         this.title = title;
         this.platform = platform;
@@ -36,5 +38,5 @@ public class TaskResponseDto {
         return platform;
     }
 
-    public String getDifficulty(){return difficulty;}
+    public Difficulty getDifficulty(){return difficulty;}
 }

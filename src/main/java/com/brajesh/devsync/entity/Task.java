@@ -17,12 +17,13 @@ public class Task {
     private String platform;
 
     @NotBlank(message = "Difficulty cannot be empty")
-    private String difficulty;
+    @Enumerated(EnumType.STRING)  // store as text in DB
+    private Difficulty difficulty;
 
     public Task(){
         // Needed for JSON deserialization
     }
-    public Task(Integer id,String title,String platform, String difficulty){
+    public Task(Integer id,String title,String platform, Difficulty difficulty){
         this.id = id;
         this.title = title;
         this.platform = platform;
@@ -52,11 +53,11 @@ public class Task {
         this.platform = platform;
     }
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 }

@@ -1,5 +1,6 @@
 package com.brajesh.devsync.controller;
 
+import com.brajesh.devsync.entity.Difficulty;
 import com.brajesh.devsync.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.brajesh.devsync.dto.TaskRequestDto;
@@ -181,7 +182,15 @@ public class TaskController {
         // total tasks count
         long total = taskRepository.count();
 
+        // ✅ Count by difficulty
+        long easy = taskRepository.countByDifficulty(Difficulty.EASY);
+        long medium = taskRepository.countByDifficulty(Difficulty.MEDIUM);
+        long hard = taskRepository.countByDifficulty(Difficulty.HARD);
+
         summary.put("total", total);
+        summary.put("easy", easy);
+        summary.put("medium", medium);
+        summary.put("hard", hard);
 
         return summary;
     }

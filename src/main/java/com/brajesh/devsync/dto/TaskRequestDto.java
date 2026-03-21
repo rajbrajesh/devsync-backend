@@ -1,5 +1,6 @@
 package com.brajesh.devsync.dto;
 
+import com.brajesh.devsync.entity.Difficulty;
 import jakarta.validation.constraints.NotBlank;
 
 public class TaskRequestDto {
@@ -11,7 +12,7 @@ public class TaskRequestDto {
     private String platform;
 
     @NotBlank(message="difficulty can noot be blank")
-    private String difficulty;
+    private Difficulty difficulty;
 
     // Getter Setter
 
@@ -21,11 +22,11 @@ public class TaskRequestDto {
     public String getPlatform() { return platform; }
     public void setPlatform(String platform) { this.platform = platform; }
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 }
