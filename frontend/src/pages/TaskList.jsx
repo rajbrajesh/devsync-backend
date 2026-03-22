@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchTasks, deleteTask, updateTask} from "../api/taskApi";
+import { searchTasks,fetchTasks, deleteTask, updateTask} from "../api/taskApi";
 import AddTask from "../components/task/AddTask";
 
 /**
@@ -27,14 +27,16 @@ function TaskList() {
 
   const [editDifficulty, setEditDifficulty] = useState("");
 
+  const [difficultyFilter, setDifficultyFilter] = useState("All");
+
   /**
    * useEffect hook
    * Runs when component loads for the first time
    */
   // Runs when component loads
   useEffect(() => {
-    loadTasks();
-  }, []);
+  loadTasks();
+}, [searchTerm, platformFilter, difficultyFilter]);
 
   function startEditing(task) {
 
@@ -52,21 +54,23 @@ function TaskList() {
    */
   async function loadTasks() {
 
-    try {
+  try {
 
-      const data = await fetchTasks();
+    const data = await searchTasks(
+      searchTerm,
+      platformFilter,
+      difficultyFilter
+    );
 
-      setTasks(data);
+    setTasks(data);
 
-    } catch (error) {
+  } catch (error) {
 
-      console.error("Error fetching tasks:", error);
-
-    }
+    console.error("Error fetching tasks:", error);
 
   }
 
-
+}
   /**
    * Handle delete button click
    */
@@ -137,6 +141,22 @@ function TaskList() {
           }}
         />
 
+        {/* Difficulty Filter */}
+        <select
+          value={difficultyFilter}
+          onChange={(e) => setDifficultyFilter(e.target.value)}
+          style={{
+            marginLeft:"10px",
+            padding:"8px",
+            borderRadius:"5px"
+          }}
+        >
+          <option value="All">All Difficulties</option>
+          <option value="EASY">Easy</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HARD">Hard</option>
+        </select>
+
         {/* Platform Filter */}
         <select
         value={platformFilter}
@@ -160,6 +180,7 @@ function TaskList() {
 
         <option value="GeeksForGeeks">GeeksForGeeks</option>
         </select>
+
       </div>
 
       {/* Component for adding new task */}
@@ -176,11 +197,7 @@ function TaskList() {
 
         <ul>
 
-          {tasks
-          .filter(task =>
-            task.title.toLowerCase().includes(searchTerm.toLowerCase())
-            && (platformFilter === "All" || task.platform === platformFilter))
-            .map((task) => (
+          {tasks.map((task) => (
             <li key={task.id}>
 
               {editingTaskId === task.id ? (

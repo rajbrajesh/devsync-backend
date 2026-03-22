@@ -20,5 +20,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     // Search tasks by both title and platform
     List<Task> findByTitleContainingIgnoreCaseAndPlatform(String title, String platform);
 
+    List<Task> findByTitleContainingIgnoreCaseAndPlatformAndDifficulty(String title, String platform,Difficulty difficulty);
+
     long countByDifficulty(Difficulty difficulty);
 }

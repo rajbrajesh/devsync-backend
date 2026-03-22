@@ -107,3 +107,32 @@ export const getTaskSummary = async () => {
   return response.json();
 };
 
+// Search tasks using multiple filters
+export async function searchTasks(title, platform, difficulty) {
+
+  let url = `${BASE_URL}/search/advanced?`;
+
+  // Title filter
+  if (title) {
+    url += `title=${title}&`;
+  }
+
+  // Platform filter
+  if (platform && platform !== "All") {
+    url += `platform=${platform}&`;
+  }
+
+  // Difficulty filter
+  if (difficulty && difficulty !== "All") {
+    url += `difficulty=${difficulty}`;
+  }
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Failed to search tasks");
+  }
+
+  return response.json();
+}
+

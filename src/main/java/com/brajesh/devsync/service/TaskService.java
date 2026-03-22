@@ -2,6 +2,7 @@ package com.brajesh.devsync.service;
 
 import com.brajesh.devsync.dto.TaskRequestDto;
 import com.brajesh.devsync.dto.TaskResponseDto;
+import com.brajesh.devsync.entity.Difficulty;
 import com.brajesh.devsync.entity.Task;
 import com.brajesh.devsync.exception.TaskNotFoundException;
 import com.brajesh.devsync.repository.TaskRepository;
@@ -135,34 +136,45 @@ public class TaskService {
     }
 
     // Method to perform dynamic search
-    public List<TaskResponseDto> searchTasks(String title, String platform){
+    public List<TaskResponseDto> searchTasks(
+            String title,
+            String platform,
+            Difficulty difficulty
+    ) {
 
-        List<Task> tasks;
+        logger.info("Searching tasks with title {}, platform {}, difficulty {}",
+                title, platform, difficulty);
 
-        // Case 1 → both title and platform present
-        if(title != null && platform != null){
-            tasks = taskRepository.findByTitleContainingIgnoreCaseAndPlatform(title, platform);
+        // Step 1: fetch all tasks
+        List<Task> tasks = taskRepository.findAll();
+
+        // Step 2: apply filters one by one
+
+        // Title filter
+        if (title != null && !title.isEmpty()) {
+            tasks = tasks.stream()
+                    .filter(task -> task.getTitle().toLowerCase().contains(title.toLowerCase()))
+                    .toList();
         }
 
-        // Case 2 → only title present
-        else if(title != null){
-            tasks = taskRepository.findByTitleContainingIgnoreCase(title);
+        // Platform filter
+        if (platform != null && !platform.isEmpty()) {
+            tasks = tasks.stream()
+                    .filter(task -> task.getPlatform().equalsIgnoreCase(platform))
+                    .toList();
         }
 
-        // Case 3 → only platform present
-        else if(platform != null){
-            tasks = taskRepository.findByPlatform(platform);
+        // ✅ Difficulty filter (MAIN FIX)
+        if (difficulty != null) {
+            tasks = tasks.stream()
+                    .filter(task -> task.getDifficulty() == difficulty)
+                    .toList();
         }
 
-        // Case 4 → no filter → return all tasks
-        else{
-            tasks = taskRepository.findAll();
-        }
-
-        // Convert Entity → DTO
+        // Step 3: convert to DTO
         List<TaskResponseDto> response = new ArrayList<>();
 
-        for(Task task : tasks){
+        for (Task task : tasks) {
 
             TaskResponseDto dto = new TaskResponseDto(
                     task.getId(),

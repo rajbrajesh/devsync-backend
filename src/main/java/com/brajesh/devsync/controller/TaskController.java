@@ -153,9 +153,11 @@ public class TaskController {
             @RequestParam(required = false) String title,
 
             // optional query parameter
-            @RequestParam(required = false) String platform
+            @RequestParam(required = false) String platform,
+
+            @RequestParam(required = false) Difficulty difficulty
     ){
-        return taskService.searchTasks(title, platform);
+        return taskService.searchTasks(title, platform, difficulty);
     }
 
     // API to fetch tasks sorted by a field
