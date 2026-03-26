@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { searchTasks,fetchTasks, deleteTask, updateTask} from "../api/taskApi";
 import AddTask from "../components/task/AddTask";
+import { fetchPaginatedTasks } from "../api/taskApi";
 
 /**
  * TaskList Component
@@ -29,6 +30,12 @@ function TaskList() {
 
   const [difficultyFilter, setDifficultyFilter] = useState("All");
 
+  const [page, setPage] = useState(0);
+  const [size] = useState(5);
+  const [totalPages, setTotalPages] = useState(0);
+  const [sortBy, setSortBy] = useState("title");
+
+
   /**
    * useEffect hook
    * Runs when component loads for the first time
@@ -36,7 +43,7 @@ function TaskList() {
   // Runs when component loads
   useEffect(() => {
   loadTasks();
-}, [searchTerm, platformFilter, difficultyFilter]);
+}, [page, sortBy]);
 
   function startEditing(task) {
 
@@ -52,25 +59,41 @@ function TaskList() {
   /**
    * Fetch tasks from backend
    */
+//   async function loadTasks() {
+
+//   try {
+
+//     const data = await searchTasks(
+//       searchTerm,
+//       platformFilter,
+//       difficultyFilter
+//     );
+
+//     setTasks(data);
+
+//   } catch (error) {
+
+//     console.error("Error fetching tasks:", error);
+
+//   }
+
+// }
   async function loadTasks() {
 
-  try {
+    try {
 
-    const data = await searchTasks(
-      searchTerm,
-      platformFilter,
-      difficultyFilter
-    );
+      const data = await fetchPaginatedTasks(page, size, sortBy);
 
-    setTasks(data);
+      setTasks(data.content);
+      setTotalPages(data.totalPages);
 
-  } catch (error) {
+    } catch (error) {
 
-    console.error("Error fetching tasks:", error);
+      console.error("Error fetching tasks:", error);
 
+    }
   }
 
-}
   /**
    * Handle delete button click
    */
@@ -183,6 +206,16 @@ function TaskList() {
 
       </div>
 
+      <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value="title">Sort by Title</option>
+        <option value="platform">Sort by Platform</option>
+        <option value="difficulty">Sort by Difficulty</option>
+      </select>
+
+
       {/* Component for adding new task */}
       <AddTask onTaskAdded={loadTasks} />
      
@@ -249,6 +282,27 @@ function TaskList() {
         </ul>
 
       )}
+
+      <div style={{ marginTop: "20px" }}>
+        <button
+          onClick={() => setPage(page - 1)}
+          disabled={page === 0}
+        >
+          Prev
+        </button>
+
+        <span style={{ margin: "0 10px" }}>
+          Page {page + 1} of {totalPages}
+        </span>
+
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages - 1}
+        >
+          Next
+        </button>
+      </div>
+
 
     </div>
 

@@ -2,6 +2,7 @@ package com.brajesh.devsync.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Task {
@@ -16,7 +17,7 @@ public class Task {
     @NotBlank(message = "Platform cannot be empty")
     private String platform;
 
-    @NotBlank(message = "Difficulty cannot be empty")
+    @NotNull(message = "Difficulty cannot be empty")
     @Enumerated(EnumType.STRING)  // store as text in DB
     private Difficulty difficulty;
 

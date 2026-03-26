@@ -136,3 +136,16 @@ export async function searchTasks(title, platform, difficulty) {
   return response.json();
 }
 
+
+export async function fetchPaginatedTasks(page, size, sortBy) {
+
+ const url = `${BASE_URL}/paginated?page=${page}&size=${size}&sortBy=${sortBy}`;
+
+ const response = await fetch(url);
+
+ if (!response.ok) {
+   throw new Error("Failed to fetch paginated tasks");
+ }
+
+ return response.json();
+}

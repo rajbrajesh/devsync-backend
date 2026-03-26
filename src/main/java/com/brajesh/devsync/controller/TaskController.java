@@ -9,6 +9,8 @@ import com.brajesh.devsync.entity.Task;
 import com.brajesh.devsync.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Page;
@@ -109,11 +111,27 @@ public class TaskController {
 
 
     //Api to fetch all task by pagenation
+//    @GetMapping("/paginated")
+//    public Page<Task> getTasks(Pageable pageable){
+//
+//        return taskService.getTasks(pageable);
+//    }
     @GetMapping("/paginated")
-    public Page<Task> getTasks(Pageable pageable){
+    public Page<Task> getTasks(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String sortBy
+    ) {
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(Sort.Direction.ASC, sortBy)
+        );
 
         return taskService.getTasks(pageable);
     }
+
 
 
     //Api to serch task by platform
