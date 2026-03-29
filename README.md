@@ -27,6 +27,9 @@ DevSync is a backend application that helps developers track coding problems fro
 Swagger UI available at:
 http://localhost:8080/swagger-ui/index.html
 
+URL:
+http://localhost:5173/
+
 ## Architecture
 
 Controller → Service → Repository → Database
@@ -56,6 +59,13 @@ Request Body :
 ``
 
 ## Project Structure
+
+### Front End Structure
+```
+
+```
+
+### Back End Structur
 ```
 src/main/java/com/brajesh/devsync
 │
