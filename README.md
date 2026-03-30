@@ -62,10 +62,26 @@ Request Body :
 
 ### Front End Structure
 ```
+src
+|-api
+|   |---taskApi.js
+|-assets
+|   |---
+|components
+|   |---analytics
+|       |--SummaryCard.jsx
+|       |--SummarySection.jsx
+|   |---layout
+|       |--DashboardLayout.jsx
+|       |--Navbar.jsx
+|       |--Sidebar.jsx
+|   |---learning
+|       |--LearningCardd.jsx
+|       |--LearningSection.jsx
+|   |---platform
+s```
 
-```
-
-### Back End Structur
+### Back End Structure
 ```
 src/main/java/com/brajesh/devsync
 │
