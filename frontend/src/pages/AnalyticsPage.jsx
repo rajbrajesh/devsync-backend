@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Bar } from "react-chartjs-2"
+import DifficultyChart from "../components/analytics/DifficultyChart";
+import { getTaskSummary } from "../api/taskApi";
 
 /*
 ChartJS imports
@@ -35,6 +37,12 @@ Shows statistics related to tasks
 */
 
 function AnalyticsPage(){
+
+  const [summary, setSummary] = useState({
+    easy: 0,
+    medium: 0,
+    hard: 0
+  });
 
  /*
  State to store chart data
@@ -133,7 +141,17 @@ const [latestTask,setLatestTask] = useState("")
 
        })
 
-     })
+     });
+     const fetchSummary = async () => {
+    try {
+      const data = await getTaskSummary();
+      setSummary(data);
+    } catch (error) {
+      console.error("Error fetching summary:", error);
+    }
+  };
+
+  fetchSummary();
 
  },[])
 
@@ -201,6 +219,12 @@ const [latestTask,setLatestTask] = useState("")
        }
 
      </div>
+
+     {/* Difficulty Pie Chart */}
+
+      <div style={{ width: "400px", marginTop: "40px" }}>
+        <DifficultyChart summary={summary} />
+      </div>
 
    </div>
 
