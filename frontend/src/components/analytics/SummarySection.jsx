@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SummaryCard from "./SummaryCard";
 import { getTaskSummary } from "../../api/taskApi";
+import DifficultyChart from "./DifficultyChart";
 
 const SummarySection = () => {
 
@@ -41,6 +42,7 @@ const SummarySection = () => {
         <SummaryCard title="Easy" value={summary.easy} />
         <SummaryCard title="Medium" value={summary.medium} />
         <SummaryCard title="Hard" value={summary.hard} />
+        <DifficultyChart summary={summary} />
 
 
       </div>
