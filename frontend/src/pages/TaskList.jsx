@@ -34,6 +34,7 @@ function TaskList() {
   const [size] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
   const [sortBy, setSortBy] = useState("title");
+  const [editStatus, setEditStatus] = useState("");
 
 
   /**
@@ -54,6 +55,8 @@ function TaskList() {
     setEditPlatform(task.platform);
 
     setEditDifficulty(task.difficulty || "");
+
+    setEditStatus(task.status || "TODO");
 }
 
   /**
@@ -125,8 +128,8 @@ function TaskList() {
 
       title: editTitle,
       platform: editPlatform,
-      difficulty: editDifficulty
-
+      difficulty: editDifficulty,
+      status: editStatus
     });
 
     // exit edit mode
@@ -253,6 +256,12 @@ function TaskList() {
                     <option value="HARD">Hard</option>
                   </select>
 
+                  <select value={editStatus} onChange={(e)=>setEditStatus(e.target.value)}>
+                    <option value="TODO">To Do</option>
+                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="DONE">Done</option>
+                  </select>
+
                   <button onClick={handleUpdate}>
                     Save
                   </button>
@@ -267,6 +276,9 @@ function TaskList() {
                     <span>Platform: {task.platform}</span>
                     <span className={`badge ${task.difficulty?.toLowerCase()}`}>
                       {task.difficulty}
+                    </span>
+                    <span className={`status ${task.status?.toLowerCase()}`}>
+                      {task.status}
                     </span>
                   </div>
 

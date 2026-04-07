@@ -1,6 +1,7 @@
 package com.brajesh.devsync.dto;
 
 import com.brajesh.devsync.entity.Difficulty;
+import com.brajesh.devsync.entity.Status;
 
 // DTO used to send task data to client
 // This prevents exposing internal entity structure
@@ -17,12 +18,15 @@ public class TaskResponseDto {
 
     private Difficulty difficulty;
 
+    private Status status;
+
     // Constructor
-    public TaskResponseDto(int id, String title, String platform,Difficulty difficulty) {
+    public TaskResponseDto(int id, String title, String platform,Difficulty difficulty,Status status) {
         this.id = id;
         this.title = title;
         this.platform = platform;
         this.difficulty = difficulty;
+        this.status = status;
     }
 
     // Getters

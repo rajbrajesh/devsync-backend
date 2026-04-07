@@ -21,6 +21,9 @@ public class Task {
     @Enumerated(EnumType.STRING)  // store as text in DB
     private Difficulty difficulty;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     public Task(){
         // Needed for JSON deserialization
     }
@@ -60,5 +63,13 @@ public class Task {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

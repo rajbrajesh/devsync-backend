@@ -77,6 +77,7 @@ public class TaskController {
         task.setTitle(dto.getTitle());
         task.setPlatform(dto.getPlatform());
         task.setDifficulty(dto.getDifficulty());
+        task.setStatus(dto.getStatus());
 
         return taskService.addTask(task);
     }
