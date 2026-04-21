@@ -36,6 +36,9 @@ function TaskList() {
   const [sortBy, setSortBy] = useState("title");
   const [editStatus, setEditStatus] = useState("");
 
+  // status filter state
+  const [statusFilter, setStatusFilter] = useState("All");
+
 
   /**
    * useEffect hook
@@ -183,6 +186,22 @@ function TaskList() {
           <option value="HARD">Hard</option>
         </select>
 
+        {/* Status Filter */}
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          style={{
+            marginLeft:"10px",
+            padding:"8px",
+            borderRadius:"5px"
+          }}
+        >
+          <option value="All">All Status</option>
+          <option value="TODO">To Do</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="DONE">Done</option>
+        </select>
+
         {/* Platform Filter */}
         <select
         value={platformFilter}
@@ -195,15 +214,10 @@ function TaskList() {
           borderRadius:"5px"
         }}
         >
-
         <option value="All">All Platforms</option>
-
         <option value="Leetcode">Leetcode</option>
-
         <option value="Codechef">Codechef</option>
-
         <option value="Codeforces">Codeforces</option>
-
         <option value="GeeksForGeeks">GeeksForGeeks</option>
         </select>
 
@@ -233,7 +247,22 @@ function TaskList() {
 
         <ul>
 
-          {tasks.map((task) => (
+          {tasks.filter(task =>
+              // 🔍 search by title
+              (task.title?.toLowerCase() || "")
+                .includes(searchTerm.toLowerCase())
+
+              // 📦 platform filter
+              && (platformFilter === "All" || task.platform === platformFilter)
+
+              // ⚡ difficulty filter
+              && (difficultyFilter === "All" || task.difficulty === difficultyFilter)
+
+              // 🟢 status filter (NEW)
+              && (statusFilter === "All" || task.status === statusFilter)
+
+            )
+            .map((task) => (
             <li key={task.id}>
 
               {editingTaskId === task.id ? (

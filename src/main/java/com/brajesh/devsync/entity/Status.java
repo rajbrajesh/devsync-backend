@@ -2,5 +2,6 @@ package com.brajesh.devsync.entity;
 
 public enum Status {
     TODO,
-    DONE
+    DONE,
+    IN_PROGRESS
 }

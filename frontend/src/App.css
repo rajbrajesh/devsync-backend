@@ -140,3 +140,25 @@
 .platform-link-card:hover {
  transform: translateY(-5px);
 }
+
+.status {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.status.todo {
+  background-color: #ccc;
+  color: black;
+}
+
+.status.in_progress {
+  background-color: orange;
+  color: white;
+}
+
+.status.done {
+  background-color: green;
+  color: white;
+}
