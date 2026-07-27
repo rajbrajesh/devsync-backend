@@ -4,6 +4,8 @@ import com.brajesh.devsync.entity.Difficulty;
 import com.brajesh.devsync.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.*;
 
@@ -23,4 +25,10 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByTitleContainingIgnoreCaseAndPlatformAndDifficulty(String title, String platform,Difficulty difficulty);
 
     long countByDifficulty(Difficulty difficulty);
+
+    Page<Task> findByTitleContainingIgnoreCaseAndPlatformContainingIgnoreCase(
+            String title,
+            String platform,
+            Pageable pageable
+    );
 }

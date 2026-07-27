@@ -105,7 +105,7 @@ public class TaskService {
 
         // Check if task exists
         Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found"));
+                .orElseThrow(() -> new TaskNotFoundException("Task not found"));
 
         // Delete task
         taskRepository.delete(task);
@@ -217,6 +217,26 @@ public class TaskService {
         }
 
         return response;
+    }
+
+    public Page<Task> searchTasksPaginated(
+            String title,
+            String platform,
+            Pageable pageable
+    ) {
+
+        logger.info(
+                "Searching tasks with title {} and platform {}",
+                title,
+                platform
+        );
+
+        return taskRepository
+                .findByTitleContainingIgnoreCaseAndPlatformContainingIgnoreCase(
+                        title,
+                        platform,
+                        pageable
+                );
     }
 
 }

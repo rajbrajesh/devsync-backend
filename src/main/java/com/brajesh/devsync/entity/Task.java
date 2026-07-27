@@ -9,7 +9,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotBlank(message = "Title cannot be empty")
     private String title;
@@ -27,17 +27,17 @@ public class Task {
     public Task(){
         // Needed for JSON deserialization
     }
-    public Task(Integer id,String title,String platform, Difficulty difficulty){
+    public Task(Long id,String title,String platform, Difficulty difficulty){
         this.id = id;
         this.title = title;
         this.platform = platform;
         this.difficulty = difficulty;
     }
 
-    public int getId(){
+    public Long getId(){
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

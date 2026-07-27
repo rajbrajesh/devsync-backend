@@ -55,7 +55,7 @@ public class TaskController {
             summary = "Get task by ID",
             description = "Fetch a single task using its ID"
     )
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public Task getTaskById(@PathVariable Long id){
 
         // PathVariable takes value from URL
@@ -191,6 +191,34 @@ public class TaskController {
             @RequestParam String sortBy
     ){
         return taskService.getSortedTasks(sortBy);
+    }
+
+    @GetMapping("/search-paginated")
+    public Page<Task> searchTasksPaginated(
+
+            @RequestParam(defaultValue = "") String title,
+
+            @RequestParam(defaultValue = "") String platform,
+
+            @RequestParam(defaultValue = "0") int page,
+
+            @RequestParam(defaultValue = "5") int size,
+
+            @RequestParam(defaultValue = "title") String sortBy
+
+    ) {
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(sortBy)
+        );
+
+        return taskService.searchTasksPaginated(
+                title,
+                platform,
+                pageable
+        );
     }
 
     // Get summary of tasks

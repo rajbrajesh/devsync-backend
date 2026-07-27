@@ -8,7 +8,7 @@ import com.brajesh.devsync.entity.Status;
 public class TaskResponseDto {
 
     // Unique task ID
-    private int id;
+    private Long id;
 
     // Title of the coding problem
     private String title;
@@ -21,7 +21,7 @@ public class TaskResponseDto {
     private Status status;
 
     // Constructor
-    public TaskResponseDto(int id, String title, String platform,Difficulty difficulty,Status status) {
+    public TaskResponseDto(Long id, String title, String platform, Difficulty difficulty, Status status) {
         this.id = id;
         this.title = title;
         this.platform = platform;
@@ -30,7 +30,7 @@ public class TaskResponseDto {
     }
 
     // Getters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -43,4 +43,8 @@ public class TaskResponseDto {
     }
 
     public Difficulty getDifficulty(){return difficulty;}
+
+    public Status getStatus() {
+        return status;
+    }
 }
